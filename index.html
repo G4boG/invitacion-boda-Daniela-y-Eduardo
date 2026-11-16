@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación de Boda — Daniela y Eduardo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Allura&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <main aria-label="Invitación digital de boda" class="main-wrapper">
+    <!-- Pantalla inicial con el sobre -->
+    <section id="cover-screen" class="screen cover-screen" aria-labelledby="cover-couple-names">
+      <div class="envelope-stage">
+        <p class="eyebrow cover-kicker">Nuestra boda</p>
+        <h1 id="cover-couple-names" class="cover-couple-names">Daniela y Eduardo</h1>
+
+        <button id="envelope-button" class="envelope-button" type="button" aria-describedby="cover-instruction" aria-label="Abrir invitación de boda">
+          <div class="envelope-letter">
+            <span class="serif envelope-monogram">D &amp; E</span>
+          </div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-front"></div>
+          <div class="seal" aria-hidden="true">
+            <span class="wax-seal-label">D&amp;E</span>
+          </div>
+        </button>
+
+        <p id="cover-instruction" class="cover-instruction">Toca el sobre para abrir la invitación</p>
+      </div>
+    </section>
+
+    <!-- Contenido de la invitación -->
+    <section id="invitation-screen" class="screen invitation-screen" aria-label="Detalles de la boda" aria-hidden="true">
+      <header class="topbar">
+        <nav class="topbar-inner" aria-label="Navegación de invitación">
+          <span class="serif navigation-title">Nuestra boda</span>
+          <button id="back-button" type="button" class="back-button">
+            <i data-lucide="arrow-left" width="17" height="17" aria-hidden="true"></i>
+            <span>Volver al sobre</span>
+          </button>
+        </nav>
+      </header>
+
+      <article class="invite-paper" aria-labelledby="couple-names">
+        <figure class="photo-bar">
+          <img loading="lazy" src="https://images.pexels.com/photos/1616113/pexels-photo-1616113.jpeg?auto=compress&cs=tinysrgb&w=1280" alt="Decoración de mesa elegante con flores y velas.">
+        </figure>
+
+        <header class="invite-hero">
+          <img loading="lazy" class="botanical-image botanical-top" src="https://images.pexels.com/photos/4135633/pexels-photo-4135633.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Rama de eucalipto decorativa.">
+          <img loading="lazy" class="botanical-image botanical-bottom" src="https://images.pexels.com/photos/1454794/pexels-photo-1454794.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ilustración botánica decorativa.">
+          <div class="hero-content">
+            <p class="eyebrow invite-pretitle">Nosotros</p>
+            <div class="hairline"></div>
+            <h2 id="couple-names" class="serif couple-script">Daniela y Eduardo</h2>
+            <p class="invite-intro">Tenemos el honor de invitarte a nuestra unión</p>
+          </div>
+        </header>
+
+        <section class="detail-section section-paper" aria-labelledby="when-heading">
+          <h3 id="when-heading" class="serif section-heading">🗓️</h3>
+          <div class="detail-grid">
+            <div class="detail-box">
+              <p class="eyebrow eyebrow-olive">FECHA</p>
+              <p class="serif detail-value">05 de Febrero 2027</p>
+            </div>
+            <div class="detail-box">
+              <p class="eyebrow eyebrow-olive">HORA</p>
+              <p class="serif detail-value">16:00 hrs.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-section section-beige" aria-labelledby="ceremony-heading">
+          <h3 id="ceremony-heading" class="sr-only">Ceremonia y evento</h3>
+          <p class="eyebrow eyebrow-olive">LUGAR DE LA CEREMONIA Y EVENTO</p>
+          <p class="serif detail-value">Salón de Eventos El Quincho</p>
+          <p class="detail-text">Dunas 128, La Serena, Coquimbo</p>
+        </section>
+
+        <section class="detail-section section-paper" aria-labelledby="photo-heading">
+          <p class="eyebrow eyebrow-olive">RECUERDOS Y DETALLES</p>
+          <h3 id="photo-heading" class="serif section-heading section-heading-spaced">Un día para recordar</h3>
+          <div class="photo-composition">
+            <figure class="photo-frame photo-frame-tall">
+              <!-- Reemplazar src por ruta o URL válida de imagen -->
+              <img loading="lazy" src="https://media.canva.com/v2/image-resize/format:JPG/height:1600/quality:92/uri:ifs%3A%2F%2FM%2F7d048b92-155d-4edc-b7ec-54dbc266307e/watermark:F/width:1066?csig=AAAAAAAAAAAAAAAAAAAAAFCXE9IDeuiJ-VjETTLATUW4FNHqct26x_-EtbkCMU8B&exp=1794817419&osig=AAAAAAAAAAAAAAAAAAAAACIS6BjNDhH4_VOjHGjihHKGLlJOjDThpfKqXlWgGvjs&signer=media-rpc&token=AAIAAU0AJDdkMDQ4YjkyLTE1NWQtNGVkYy1iN2VjLTU0ZGJjMjY2MzA3ZQAAAAABoeN0ZviuqX6guYXuBFhJTROQEoeVBA8F-XJaXfiuR_NMZUdUfA&x-canva-quality=screen_2x" alt="Manos entrelazadas de la pareja.">
+            </figure>
+            <figure class="photo-frame photo-frame-tall">
+              <!-- Reemplazar src por ruta o URL válida de imagen -->
+              <img loading="lazy" src="https://media.canva.com/v2/image-resize/format:JPG/height:600/quality:92/uri:ifs%3A%2F%2FM%2Fb442d153-9435-498c-be3c-c7fd6d35a0f5/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAAKd9zL09bBaAlctFuU8_uZiDfHonDbat6ol7BJYah1Hy&exp=1794817878&osig=AAAAAAAAAAAAAAAAAAAAALyJY6O-m_-S1FInL0Yvu8GPgI11F81oJiO0bM7XmPJD&signer=media-rpc&token=AAIAAU0AJGI0NDJkMTUzLTk0MzUtNDk4Yy1iZTNjLWM3ZmQ2ZDM1YTBmNQAAAAABoeN7Z_D6Z0julIUSUQNYHAsJIxmq2eIPm6EjVufyVEXrHBsezg&x-canva-quality=screen" alt="Montaje exterior para boda al atardecer.">
+            </figure>
+          </div>
+          <figure class="photo-frame photo-frame-wide">
+            <!-- Reemplazar src por ruta o URL válida de imagen -->
+            <img loading="lazy" src="https://media-public.canva.com/g10yc/MAGbf4g10yc/1/s2.jpg" alt="Salón de eventos iluminado con flores y velas.">
+          </figure>
+        </section>
+
+        <section class="detail-section section-paper" aria-labelledby="reception-heading">
+          <h3 id="reception-heading" class="serif section-heading">Recepción</h3>
+          <p class="eyebrow eyebrow-olive mt-block">LUGAR DE LA RECEPCIÓN</p>
+          <p class="serif detail-value">Lugar de la recepción</p>
+          <p class="detail-text">Información sobre la celebración posterior</p>
+        </section>
+
+        <section class="detail-section section-beige" aria-labelledby="countdown-heading">
+          <p class="eyebrow eyebrow-olive">CUENTA REGRESIVA</p>
+          <h3 id="countdown-heading" class="serif section-heading section-heading-spaced">Guarda la fecha ♡</h3>
+          <p class="detail-text">¡Falta muy poco!</p>
+          <div class="countdown-grid" aria-live="polite" aria-label="Cuenta regresiva">
+            <div class="count-card">
+              <span id="days-value" class="count-number">--</span>
+              <span class="count-label">Días</span>
+            </div>
+            <div class="count-card">
+              <span id="hours-value" class="count-number">--</span>
+              <span class="count-label">Horas</span>
+            </div>
+            <div class="count-card">
+              <span id="minutes-value" class="count-number">--</span>
+              <span class="count-label">Minutos</span>
+            </div>
+            <div class="count-card">
+              <span id="seconds-value" class="count-number">--</span>
+              <span class="count-label">Segundos</span>
+            </div>
+          </div>
+          <p id="countdown-status" class="countdown-status" aria-live="polite"></p>
+        </section>
+
+        <section class="detail-section section-paper" aria-labelledby="dress-heading">
+          <p class="eyebrow eyebrow-olive">DRESS CODE</p>
+          <h3 id="dress-heading" class="serif section-heading section-heading-spaced">Código de vestimenta</h3>
+          <p class="detail-text pre-line">En esta ocasión tan especial queremos recordar que esperamos verlos elegantes, con trajes y vestidos largos. Sin embargo, hay colores prohibidos, los cuales son: Blanco, Rojo y Beige.
+Agradecemos tu disposición y compromiso por elegir una vestimenta que esté acorde a nuestra celebración.</p>
+
+            <figure class="dress-code-figure">
+                <img src="https://media.discordapp.net/attachments/959096658686263297/1571738030291820695/Gemini_Generated_Image_k6vs6wk6vs6wk6vs.jpg?ex=6afbd29b&is=6afa811b&hm=dc26b50ab6c4e324fa7a49f81814489823dee08dc6990e5ade16d5b89e84e2a8&format=webp&width=1280&height=956" alt="Colores Prohibidos">
+            </figure>
+
+             
+        </section>
+
+        <section class="detail-section section-paper" aria-labelledby="dress-heading">
+
+             <figure class="dress-code-figure">
+                <img src="https://media.discordapp.net/attachments/959096658686263297/1571742974524522516/Gemini_Generated_Image_jj1ffqjj1ffqjj1f.jpg?ex=6afbd736&is=6afa85b6&hm=27cb513e2d83d4df690bccf8ca63ca1d363638ad13cc71ecda5908bad9d973d2&format=webp&width=1280&height=956" alt="Colores Sugeridos">
+             </figure>
+        </section>
+
+
+
+
+
+        <section class="rsvp-panel" aria-labelledby="rsvp-heading">
+  <p class="eyebrow rsvp-kicker">CONFIRMAR ASISTENCIA</p>
+  <h3 id="rsvp-heading" class="serif rsvp-heading">Agradecemos tu respuesta</h3>
+  <p class="rsvp-description">Confirma con nosotros tu asistencia antes del 10 de Diciembre</p>
+
+  <div class="rsvp-actions">
+    <a id="confirm-link-btn" class="rsvp-button" href="confirmar.html" aria-label="Ir a confirmar asistencia">
+      <i data-lucide="check-circle" width="18" height="18" aria-hidden="true"></i>
+      <span>Confirmar asistencia</span>
+    </a>
+
+    <!-- Solo se muestra si el invitado confirmó positivamente -->
+    <a id="location-btn" class="rsvp-button" href="https://maps.app.goo.gl/G8hHwceEse7dcLti8" target="_blank" rel="noopener noreferrer" aria-label="Ver ubicación de la ceremonia" style="display: none; background: #173a5b; border: 1px solid var(--silver);">
+      <i data-lucide="map-pin" width="18" height="18" aria-hidden="true"></i>
+      <span>Ver ubicación</span>
+    </a>
+  </div>
+</section>
+
+        <footer class="detail-section section-paper contact-footer" aria-labelledby="contact-heading">
+          <h3 id="contact-heading" class="serif contact-heading">Datos de contacto</h3>
+          <p class="detail-text pre-line">+56 9 6302 4622
++56 9 2046 7900</p>
+        </footer>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      const envelope = document.getElementById("envelope-button");
+      const cover = document.getElementById("cover-screen");
+      const invitation = document.getElementById("invitation-screen");
+      const backButton = document.getElementById("back-button");
+
+      function openInvitation() {
+        if (invitation.classList.contains("is-visible")) return;
+
+        envelope.classList.add("is-opening");
+        cover.classList.add("is-leaving");
+
+        window.setTimeout(() => {
+          cover.style.display = "none";
+          invitation.style.display = "block";
+          invitation.classList.add("is-visible");
+          invitation.setAttribute("aria-hidden", "false");
+          backButton.focus();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 570);
+      }
+
+      function returnToCover() {
+        invitation.classList.remove("is-visible");
+        invitation.setAttribute("aria-hidden", "true");
+
+        window.setTimeout(() => {
+          invitation.style.display = "none";
+          cover.style.display = "grid";
+          cover.classList.remove("is-leaving");
+          envelope.classList.remove("is-opening");
+          envelope.focus();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 180);
+      }
+
+      envelope.addEventListener("click", openInvitation);
+      backButton.addEventListener("click", returnToCover);
+
+      const countdownTarget = new Date("2027-02-05T16:00:00-03:00");
+      const countdownStatus = document.getElementById("countdown-status");
+      const countdownValues = {
+        days: document.getElementById("days-value"),
+        hours: document.getElementById("hours-value"),
+        minutes: document.getElementById("minutes-value"),
+        seconds: document.getElementById("seconds-value")
+      };
+
+      function setCountdownValues(days, hours, minutes, seconds) {
+        countdownValues.days.textContent = days;
+        countdownValues.hours.textContent = hours;
+        countdownValues.minutes.textContent = minutes;
+        countdownValues.seconds.textContent = seconds;
+      }
+
+      function updateCountdown() {
+        const distance = countdownTarget.getTime() - Date.now();
+
+        if (Number.isNaN(countdownTarget.getTime())) {
+          setCountdownValues("--", "--", "--", "--");
+          countdownStatus.textContent = "";
+          return;
+        }
+
+        if (distance <= 0) {
+          setCountdownValues("00", "00", "00", "00");
+          countdownStatus.textContent = "¡Ha llegado el gran día!";
+          return;
+        }
+
+        const totalSeconds = Math.floor(distance / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        setCountdownValues(
+          String(days).padStart(2, "0"),
+          String(hours).padStart(2, "0"),
+          String(minutes).padStart(2, "0"),
+          String(seconds).padStart(2, "0")
+        );
+        countdownStatus.textContent = "";
+      }
+
+      window.setInterval(updateCountdown, 1000);
+      updateCountdown();
+    });
+
+    const locationBtn = document.getElementById("location-btn");
+if (localStorage.getItem("boda_asistencia_confirmada") === "si") {
+  locationBtn.style.display = "inline-flex";
+}
+  </script>
+</body>
+</html>

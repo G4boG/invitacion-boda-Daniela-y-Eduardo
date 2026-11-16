@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Invitados — Daniela y Eduardo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #102a43;
+      --beige: #f4eee4;
+      --paper: #fffdf9;
+      --olive: #73816a;
+      --ink: #283641;
+      --muted: #52616b;
+      --border: #dce1df;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--beige);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      z-index: 50;
+    }
+
+    .login-card {
+      background: var(--paper);
+      padding: 2rem;
+      border-radius: 8px;
+      width: min(100%, 360px);
+      text-align: center;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    .login-card h1 {
+      font-family: "Alegreya", serif;
+      color: var(--navy);
+      margin: 0 0 0.5rem;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 1rem 0;
+      border: 1px solid #bcc6cc;
+      border-radius: 6px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .btn {
+      padding: 0.7rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      background: var(--navy);
+      color: #ffffff;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-olive {
+      background: var(--olive);
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-family: "Alegreya", serif;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--paper);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--olive);
+      box-shadow: 0 4px 12px rgba(16, 42, 67, 0.06);
+    }
+
+    .stat-card span {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-family: "Alegreya", serif;
+      font-size: 2.2rem;
+      color: var(--navy);
+      margin-top: 0.25rem;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .toolbar input,
+    .toolbar select {
+      padding: 0.65rem 0.85rem;
+      border: 1px solid #bcc6cc;
+      border-radius: 6px;
+      background: var(--paper);
+      font-family: inherit;
+    }
+
+    .table-wrap {
+      background: var(--paper);
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    th {
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .badge-yes {
+      background: #d8f3dc;
+      color: #1b4332;
+    }
+
+    .badge-no {
+      background: #ffe5d9;
+      color: #9b2226;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pantalla de acceso -->
+  <div id="login-screen" class="login-overlay">
+    <div class="login-card">
+      <h1>Panel de Novios</h1>
+      <p style="color: var(--muted); font-size: 0.9rem;">Ingresa la clave para ver las confirmaciones</p>
+      <input type="password" id="pin-input" placeholder="Clave de acceso">
+      <button class="btn" id="login-btn" style="width: 100%;">Entrar</button>
+      <p id="login-error" style="color: #c1121f; font-size: 0.85rem; margin-top: 0.75rem;"></p>
+    </div>
+  </div>
+
+  <!-- Contenido del panel -->
+  <main class="container" id="dashboard" style="display: none;">
+    <header>
+      <div>
+        <h1>Confirmaciones — Daniela y Eduardo</h1>
+        <p style="margin: 0.25rem 0 0; color: var(--muted);">Lista de invitados actualizada</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="btn" id="refresh-btn">Actualizar</button>
+        <button class="btn btn-olive" id="export-btn">Descargar Excel (CSV)</button>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span>Asisten (Confirmados)</span>
+        <strong id="stat-yes">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>No Asisten</span>
+        <strong id="stat-no">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Total Respuestas</span>
+        <strong id="stat-total">0</strong>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <input type="text" id="search-input" placeholder="Buscar por nombre...">
+      <select id="filter-select">
+        <option value="ALL">Todos los estados</option>
+        <option value="Sí">Solo asistentes</option>
+        <option value="No">No asisten</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Teléfono</th>
+            <th>Restricciones / Mensaje</th>
+          </tr>
+        </thead>
+        <tbody id="guests-tbody">
+          <tr><td colspan="5" style="text-align:center;">Cargando datos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    // 1. Pega aquí la URL de Google Apps Script (la misma que en confirmar.html)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyJJRODMMKE3p4ZlA0lCkysmWjULtys2bHpAz6-vDumNuK6biDf2__MyDPqENvFH-Miw/exec";
+
+    // 2. Clave para entrar al panel cuando lo abras en el navegador
+    const CLAVE_PANEL = "2027";
+
+    let allGuests = [];
+
+    const loginScreen = document.getElementById("login-screen");
+    const dashboard = document.getElementById("dashboard");
+    const pinInput = document.getElementById("pin-input");
+
+    function checkAuth() {
+      if (sessionStorage.getItem("panel_auth") === "ok") {
+        loginScreen.style.display = "none";
+        dashboard.style.display = "block";
+        loadGuests();
+      }
+    }
+
+    document.getElementById("login-btn").addEventListener("click", () => {
+      if (pinInput.value === CLAVE_PANEL) {
+        sessionStorage.setItem("panel_auth", "ok");
+        checkAuth();
+      } else {
+        document.getElementById("login-error").textContent = "Clave incorrecta";
+      }
+    });
+
+    pinInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("login-btn").click();
+    });
+
+    async function loadGuests() {
+      const tbody = document.getElementById("guests-tbody");
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Actualizando...</td></tr>';
+
+      try {
+        if (SCRIPT_URL) {
+          const res = await fetch(SCRIPT_URL);
+          allGuests = await res.json();
+        } else {
+          allGuests = JSON.parse(localStorage.getItem("rsvp_boda") || "[]");
+        }
+        renderDashboard();
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#c1121f;">Error al cargar los datos.</td></tr>';
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text || "";
+      return div.innerHTML;
+    }
+
+    function renderDashboard() {
+      const query = document.getElementById("search-input").value.toLowerCase();
+      const filter = document.getElementById("filter-select").value;
+
+      let totalYes = 0;
+      let totalNo = 0;
+
+      allGuests.forEach((g) => {
+        if (g.asistencia === "Sí") {
+          totalYes++;
+        } else {
+          totalNo++;
+        }
+      });
+
+      document.getElementById("stat-yes").textContent = totalYes;
+      document.getElementById("stat-no").textContent = totalNo;
+      document.getElementById("stat-total").textContent = allGuests.length;
+
+      const filtered = allGuests.filter((g) => {
+        const matchName = (g.nombre || "").toLowerCase().includes(query);
+        const matchStatus = filter === "ALL" || g.asistencia === filter;
+        return matchName && matchStatus;
+      }).reverse();
+
+      const tbody = document.getElementById("guests-tbody");
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay registros para mostrar.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((g) => `
+        <tr>
+          <td>${escapeHtml(g.fecha)}</td>
+          <td><strong>${escapeHtml(g.nombre)}</strong></td>
+          <td><span class="badge ${g.asistencia === "Sí" ? "badge-yes" : "badge-no"}">${escapeHtml(g.asistencia)}</span></td>
+          <td>${escapeHtml(g.telefono)}</td>
+          <td>${escapeHtml(g.mensaje) || "-"}</td>
+        </tr>
+      `).join("");
+    }
+
+    document.getElementById("search-input").addEventListener("input", renderDashboard);
+    document.getElementById("filter-select").addEventListener("change", renderDashboard);
+    document.getElementById("refresh-btn").addEventListener("click", loadGuests);
+
+    document.getElementById("export-btn").addEventListener("click", () => {
+      const headers = ["Fecha", "Nombre", "Asistencia", "Telefono", "Restricciones y Mensaje"];
+      const rows = allGuests.map((g) => [
+        g.fecha,
+        g.nombre,
+        g.asistencia,
+        g.telefono,
+        (g.mensaje || "").replace(/\n/g, " ")
+      ].map((v) => `"${String(v || "").replace(/"/g, '""')}"`).join(","));
+
+      const csv = "\uFEFF" + [headers.join(","), ...rows].join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "invitados-boda.csv";
+      link.click();
+    });
+
+    checkAuth();
+  </script>
+</body>
+</html>

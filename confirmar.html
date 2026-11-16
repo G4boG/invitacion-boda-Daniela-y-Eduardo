@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmar Asistencia — Daniela y Eduardo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;600;700&family=Allura&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" defer></script>
+  <style>
+    .confirm-wrapper {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .confirm-card {
+      width: min(100%, 540px);
+      background: var(--paper);
+      border: 1px solid #dce1df;
+      box-shadow: 0 18px 55px rgba(16, 42, 67, 0.13);
+      overflow: hidden;
+    }
+
+    .confirm-header {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 2.25rem 1.75rem;
+      text-align: center;
+    }
+
+    .confirm-header h1 {
+      margin: 0.4rem 0 0;
+      font-family: "Allura", cursive;
+      font-size: 2.6rem;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    .confirm-body {
+      padding: 2rem 1.75rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: var(--navy);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06rem;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 0.9rem;
+      color: var(--ink);
+      background: #ffffff;
+      border: 1px solid var(--silver);
+      border-radius: 6px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: 2px solid var(--olive);
+      outline-offset: 2px;
+    }
+
+    .radio-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .radio-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .radio-card input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 0.75rem;
+      border: 1px solid var(--silver);
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .radio-card input:checked + .radio-box {
+      background: var(--navy);
+      color: #ffffff;
+      border-color: var(--navy);
+    }
+
+    .result-box {
+      display: none;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .result-box h2 {
+      margin: 0 0 0.75rem;
+      color: var(--navy);
+      font-family: "Alegreya", serif;
+      font-size: 1.6rem;
+    }
+
+    .result-box p {
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0 0 1.5rem;
+    }
+
+    .actions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .actions-stack .rsvp-button,
+    .actions-stack .back-button {
+      width: 100%;
+      max-width: 280px;
+      padding: 0.8rem 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 480px) {
+      .radio-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="confirm-wrapper">
+    <div class="confirm-card">
+      <header class="confirm-header">
+        <p class="eyebrow" style="color: var(--silver);">Nuestra Boda · 05 Feb 2027</p>
+        <h1>Daniela y Eduardo</h1>
+      </header>
+
+      <div class="confirm-body">
+        <form id="rsvp-form">
+          <div class="form-group">
+            <label for="guest-name">Tu Nombre y Apellido *</label>
+            <input type="text" id="guest-name" required placeholder="Ej: Camila Soto">
+          </div>
+
+          <div class="form-group">
+            <label>¿Podrás acompañarnos? *</label>
+            <div class="radio-options">
+              <label class="radio-card">
+                <input type="radio" name="asistencia" value="Sí" required>
+                <span class="radio-box">Sí, asistiré</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="asistencia" value="No" required>
+                <span class="radio-box">No podré asistir</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Visible solo si confirma asistencia positiva -->
+          <div id="yes-only-fields" style="display: none;">
+            <div class="form-group">
+              <label for="guest-diet">Restricción alimentaria o alergias (opcional)</label>
+              <input type="text" id="guest-diet" placeholder="Ej: Vegetariano, celíaco, alergia a frutos secos...">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guest-phone">Teléfono / WhatsApp *</label>
+            <input type="tel" id="guest-phone" required placeholder="+56 9 1234 5678">
+          </div>
+
+          <div class="form-group">
+            <label for="guest-notes">Mensaje para los novios (opcional)</label>
+            <textarea id="guest-notes" rows="2" placeholder="Déjanos unas palabras..."></textarea>
+          </div>
+
+          <div class="actions-stack" style="margin-top: 1.5rem;">
+            <button type="submit" id="submit-btn" class="rsvp-button">
+              <span>Enviar respuesta</span>
+            </button>
+            <a href="index.html" class="back-button" style="background: transparent; color: var(--navy); border: 1px solid var(--silver);">
+              <i data-lucide="arrow-left" width="16" height="16"></i>
+              <span>Volver a la invitación</span>
+            </a>
+          </div>
+        </form>
+
+        <!-- Resultado si responde SÍ -->
+        <div id="result-yes" class="result-box">
+          <h2>¡Qué alegría contar contigo!</h2>
+          <p>Tu asistencia ha quedado registrada. Aquí tienes el enlace directo con la ubicación del evento:</p>
+          <div class="actions-stack">
+            <a class="rsvp-button" href="https://www.google.com/maps/place/Sal%C3%B3n+de+Eventos+El+Quincho/@-29.8830411,-71.2687016,1547m/data=!3m1!1e3!4m6!3m5!1s0x9691b5929e914a37:0x99e34a683fa7e18c!8m2!3d-29.8848239!4d-71.2618713!16s%2Fg%2F11ckc274yc!5m1!1e4?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+              <i data-lucide="map-pin" width="18" height="18"></i>
+              <span>Ver ubicación</span>
+            </a>
+            <button type="button" class="back-button edit-response-btn" style="background: transparent; color: var(--navy); border: 1px solid var(--silver);">
+              <span>Modificar mi respuesta</span>
+            </button>
+            <a href="index.html" class="back-button">
+              <span>Volver a la invitación</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Resultado si responde NO -->
+        <div id="result-no" class="result-box">
+          <h2>Gracias por avisarnos</h2>
+          <p>Lamentamos mucho que no puedas acompañarnos en este día. Si llegas a cambiar de opinión, puedes volver a confirmar tu asistencia en cualquier momento.</p>
+          <div class="actions-stack">
+            <button type="button" class="rsvp-button edit-response-btn">
+              <span>Cambiar mi respuesta</span>
+            </button>
+            <a href="index.html" class="back-button">
+              <span>Volver a la invitación</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
+
+      // Pega aquí la URL de Google Apps Script (la misma que en panel.html)
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyJJRODMMKE3p4ZlA0lCkysmWjULtys2bHpAz6-vDumNuK6biDf2__MyDPqENvFH-Miw/exec";
+
+      const form = document.getElementById("rsvp-form");
+      const radios = document.querySelectorAll('input[name="asistencia"]');
+      const yesOnlyFields = document.getElementById("yes-only-fields");
+      const nameInput = document.getElementById("guest-name");
+      const phoneInput = document.getElementById("guest-phone");
+      const dietInput = document.getElementById("guest-diet");
+      const notesInput = document.getElementById("guest-notes");
+      const submitBtn = document.getElementById("submit-btn");
+
+      const resultYes = document.getElementById("result-yes");
+      const resultNo = document.getElementById("result-no");
+      const editBtns = document.querySelectorAll(".edit-response-btn");
+
+      let enviando = false;
+
+      // Normaliza el teléfono (últimos 8 dígitos) para detectar duplicados aunque escriban +56 o espacios
+      function normalizarTelefono(tel) {
+        return String(tel || "").replace(/\D/g, "").slice(-8);
+      }
+
+      // Si el invitado ya había respondido en este dispositivo, muestra su estado y precarga sus datos
+      const respuestaPrevia = JSON.parse(localStorage.getItem("boda_datos_invitado") || "null");
+      if (respuestaPrevia) {
+        nameInput.value = respuestaPrevia.nombre || "";
+        phoneInput.value = respuestaPrevia.telefono || "";
+        dietInput.value = respuestaPrevia.dieta || "";
+        notesInput.value = respuestaPrevia.notas || "";
+
+        const radioGuardado = document.querySelector(`input[name="asistencia"][value="${respuestaPrevia.asistencia}"]`);
+        if (radioGuardado) {
+          radioGuardado.checked = true;
+          yesOnlyFields.style.display = respuestaPrevia.asistencia === "Sí" ? "block" : "none";
+        }
+
+        form.style.display = "none";
+        if (respuestaPrevia.asistencia === "Sí") {
+          resultYes.style.display = "block";
+        } else {
+          resultNo.style.display = "block";
+        }
+      }
+
+      radios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          yesOnlyFields.style.display = radio.value === "Sí" ? "block" : "none";
+        });
+      });
+
+      editBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          resultYes.style.display = "none";
+          resultNo.style.display = "none";
+          form.style.display = "block";
+        });
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (enviando) return; // Bloquea doble clic inmediato
+
+        enviando = true;
+        submitBtn.disabled = true;
+        submitBtn.querySelector("span").textContent = "Guardando...";
+
+        const asistencia = document.querySelector('input[name="asistencia"]:checked').value;
+        const diet = asistencia === "Sí" ? dietInput.value.trim() : "";
+        const notes = notesInput.value.trim();
+
+        let mensajeFinal = "";
+        if (diet && notes) {
+          mensajeFinal = `Restricción: ${diet} | Mensaje: ${notes}`;
+        } else if (diet) {
+          mensajeFinal = `Restricción: ${diet}`;
+        } else {
+          mensajeFinal = notes;
+        }
+
+        const payload = {
+          fecha: new Date().toLocaleString("es-CL"),
+          nombre: nameInput.value.trim(),
+          asistencia: asistencia,
+          invitados: asistencia === "Sí" ? 1 : 0,
+          telefono: phoneInput.value.trim(),
+          mensaje: mensajeFinal
+        };
+
+        try {
+          if (SCRIPT_URL) {
+            await fetch(SCRIPT_URL, {
+              method: "POST",
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify(payload)
+            });
+          } else {
+            // En local: busca si el teléfono ya existe y lo actualiza en vez de duplicar
+            const guardados = JSON.parse(localStorage.getItem("rsvp_boda") || "[]");
+            const telClave = normalizarTelefono(payload.telefono);
+            const indiceExistente = guardados.findIndex(
+              (g) => telClave && normalizarTelefono(g.telefono) === telClave
+            );
+
+            if (indiceExistente !== -1) {
+              guardados[indiceExistente] = payload;
+            } else {
+              guardados.push(payload);
+            }
+            localStorage.setItem("rsvp_boda", JSON.stringify(guardados));
+          }
+
+          // Guarda estado en el navegador del invitado
+          localStorage.setItem("boda_asistencia_confirmada", asistencia === "Sí" ? "si" : "no");
+          localStorage.setItem("boda_datos_invitado", JSON.stringify({
+            nombre: payload.nombre,
+            telefono: payload.telefono,
+            asistencia: asistencia,
+            dieta: diet,
+            notas: notes
+          }));
+
+          form.style.display = "none";
+          if (asistencia === "Sí") {
+            resultYes.style.display = "block";
+          } else {
+            resultNo.style.display = "block";
+          }
+        } catch (error) {
+          alert("Ocurrió un error al enviar tu confirmación. Intenta nuevamente.");
+        } finally {
+          enviando = false;
+          submitBtn.disabled = false;
+          submitBtn.querySelector("span").textContent = "Enviar respuesta";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
