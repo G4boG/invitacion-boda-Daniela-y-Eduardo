@@ -558,6 +558,11 @@ input {
   filter: brightness(1.08);
   transform: translateY(-2px);
 }
+.rsvp-button1:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
 
 .rsvp-panel {
   padding: 2.4rem 2rem;
@@ -672,7 +677,26 @@ input {
 }
 
 
-.gift-link-btn {
-  color: rgb(rgb(27, 38, 84) green blue / alpha);
-  background-color: rgb(rgb(27, 38, 84) green blue / alpha);
+.rsvp-button1 {
+  min-width: 210px;
+  padding: 0.75rem 1.5rem;
+  background: var(--navy);
+  color: #ffffff;
+  font-size: 1rem;
+   display: inline-flex;
+  gap: 0.55rem;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.rsvp-button1:focus-visible {
+  outline: 3px solid var(--olive);
+  outline-offset: 5px;
 }
