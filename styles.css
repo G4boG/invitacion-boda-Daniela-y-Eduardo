@@ -21,9 +21,10 @@ body {
   margin: 0;
   width: 100%;
   min-height: 100vh;
-  background: var(--beige);
+  background: url(5.png);
   color: var(--ink);
   font-family: "DM Sans", sans-serif;
+  
 }
 
 button,
@@ -668,4 +669,10 @@ input {
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
+}
+
+
+.gift-link-btn {
+  color: rgb(rgb(27, 38, 84) green blue / alpha);
+  background-color: rgb(rgb(27, 38, 84) green blue / alpha);
 }
